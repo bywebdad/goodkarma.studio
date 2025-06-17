@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
+  // Включение автономного режима для Docker
+  output: 'standalone',
+  
   // Optimize for modern browsers only
   experimental: {
     browsersListForSwc: true,
@@ -59,6 +62,11 @@ const nextConfig = {
   
   images: {
     unoptimized: true,
+  },
+  
+  // Настройка порта для разработки
+  devServer: {
+    port: process.env.PORT || 3001,
   },
 }
 
