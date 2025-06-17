@@ -1,50 +1,38 @@
-name: Deploy
+name: BUILD
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
-
-env:
-  NODE_ENV: production
-  NEXT_TELEMETRY_DISABLED: 1
+    branches: [main]
 
 jobs:
-  deploy:
+  Build:
+    name: Build and publish web docker image
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
+      - name: Pull project
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
-          node-version: '20'
+          registry: ghcr.io
+          username: bywebdad
+          password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
-          run_install: false
+      - name: Build image
+        run: docker build -t ghcr.io/bywebdad/goodkarma.studio .
 
-      - name: Get pnpm store directory
-        id: pnpm-store
-        shell: bash
+      - name: Publish web image
+        run: docker push ghcr.io/bywebdad/goodkarma.studio:latest
+
+
+  Deploy:
+    name: Deploy the project to the server
+    needs:
+      - Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deploy webhook
         run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-          echo "store_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
-
-      - name: Cache pnpm dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-store.outputs.store_path }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm build
+          curl -X POST -H "Content-Type: application/json" \
+          https://dokploy.webdad.by/api/deploy/U9xA2djOaeX5iAJp7xqwC
