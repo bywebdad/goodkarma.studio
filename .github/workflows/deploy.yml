@@ -16,8 +16,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: bywebdad
-          password: ${{ secrets.GHCR_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build image
         run: docker build -t ghcr.io/bywebdad/goodkarma.studio .
