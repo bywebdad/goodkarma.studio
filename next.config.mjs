@@ -38,13 +38,13 @@ const nextConfig = {
                     rule.use.options = {
                         ...rule.use.options,
                         jsc: {
-                            ...rule.use.options ? .jsc,
-                            target : 'es2020',
+                            ...rule.use.options?.jsc,
+                            target: 'es2020',
                             // Disable class transformation
                             transform: {
-                                ...rule.use.options ? .jsc ? .transform,
-                                legacyDecorator : false,
-                                decoratorMetadata : false,
+                                ...rule.use.options?.jsc?.transform,
+                                legacyDecorator: false,
+                                decoratorMetadata: false,
                             },
                         },
                     };
