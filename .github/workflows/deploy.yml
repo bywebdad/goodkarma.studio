@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/goodkarma.studio:latest
+
 jobs:
   Build:
     name: Build and publish web docker image
@@ -20,10 +23,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build image
-        run: docker build -t ghcr.io/bywebdad/goodkarma.studio .
+        run: docker build -t ${{ env.IMAGE_NAME }} .
 
       - name: Publish web image
-        run: docker push ghcr.io/bywebdad/goodkarma.studio:latest
+        run: docker push ${{ env.IMAGE_NAME }}
 
 
   Deploy:
