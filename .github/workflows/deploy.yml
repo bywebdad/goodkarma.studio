@@ -5,7 +5,8 @@ on:
     branches: [main]
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/goodkarma.studio:latest
+  # Используем личное пространство имен вместо организации
+  IMAGE_NAME: ghcr.io/goodkarma-studio:latest
 
 jobs:
   Build:
@@ -38,4 +39,4 @@ jobs:
       - name: Trigger deploy webhook
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          https://dokploy.webdad.by/api/deploy/U9xA2djOaeX5iAJp7xqwC
+          ${{ secrets.DEPLOY_WEBHOOK_URL }}
