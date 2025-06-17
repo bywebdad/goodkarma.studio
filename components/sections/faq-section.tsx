@@ -35,20 +35,30 @@ export function FAQSection() {
   ]
 
   return (
-    <section id="faq" className="py-20 bg-[#FDFDFB]">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#4E4E4E]">Часто задаваемые вопросы</h2>
-        <p className="text-lg text-[#4E4E4E] text-center mb-12 max-w-2xl mx-auto">
+    <section id="faq" className="py-12 sm:py-16 md:py-20 bg-[#FDFDFB]">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-center text-[#4E4E4E]">Часто задаваемые вопросы</h2>
+        <p className="text-base sm:text-lg text-[#4E4E4E] text-center mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto px-2">
           Ответы на самые популярные вопросы о наших услугах, записи и оплате
         </p>
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index + 1}`} className="border-b border-[#C3B299]/30">
-                <AccordionTrigger className="text-[#4E4E4E] hover:text-[#A4C49A] text-lg font-medium py-5">
+              <AccordionItem 
+                key={index} 
+                value={`item-${index + 1}`} 
+                className="border-b border-[#C3B299]/30 mb-1 sm:mb-2"
+              >
+                <AccordionTrigger 
+                  className="text-base sm:text-lg font-medium py-3 sm:py-4 md:py-5 text-[#4E4E4E] hover:text-[#A4C49A] text-left"
+                >
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[#4E4E4E]/80">{faq.answer}</AccordionContent>
+                <AccordionContent 
+                  className="text-sm sm:text-base text-[#4E4E4E]/80 text-justify sm:text-left px-1 sm:px-2 leading-relaxed"
+                >
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

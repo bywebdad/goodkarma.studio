@@ -16,9 +16,33 @@ export const metadata: Metadata = {
     "Good Karma в центре Москвы. Профессиональная забота о теле с приятными ценами. Онлайн-запись за 1 минуту.",
   generator: 'good-karma',
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/favicon_io/favicon.ico',
+    shortcut: '/favicon_io/favicon.ico',
+    apple: '/favicon_io/apple-touch-icon.png',
+    other: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        url: '/favicon_io/favicon-16x16.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        url: '/favicon_io/favicon-32x32.png',
+      },
+      {
+        rel: 'android-chrome',
+        sizes: '192x192',
+        url: '/favicon_io/android-chrome-192x192.png',
+      },
+      {
+        rel: 'android-chrome',
+        sizes: '512x512',
+        url: '/favicon_io/android-chrome-512x512.png',
+      },
+    ],
   }
 }
 
@@ -30,7 +54,11 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon_io/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${mulish.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
