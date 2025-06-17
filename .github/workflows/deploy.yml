@@ -5,8 +5,8 @@ on:
     branches: [main]
 
 env:
-  # Используем личное пространство имен вместо организации
-  IMAGE_NAME: ghcr.io/goodkarma-studio:latest
+  # Используем GitHub Packages
+  IMAGE_NAME: docker.pkg.github.com/${{ github.repository }}/goodkarma-studio:latest
 
 jobs:
   Build:
@@ -16,10 +16,10 @@ jobs:
       - name: Pull project
         uses: actions/checkout@v4
 
-      - name: Log in to GHCR
+      - name: Log in to GitHub Packages
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -39,4 +39,4 @@ jobs:
       - name: Trigger deploy webhook
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          ${{ secrets.DEPLOY_WEBHOOK_URL }}
+          https://dokploy.webdad.by/api/deploy/U9xA2djOaeX5iAJp7xqwC
