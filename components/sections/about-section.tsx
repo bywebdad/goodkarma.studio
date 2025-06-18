@@ -98,7 +98,7 @@ export function AboutSection() {
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#4E4E4E]">Философия нашей заботы</h2>
         <div className="max-w-3xl mx-auto mb-12 text-center">
           <p className="text-lg text-[#4E4E4E] mb-6">
-            Мы верим, что хорошая забота о теле должена быть доступна каждому, а не только избранным. Именно поэтому мы
+            Мы верим, что хорошая забота о теле должна быть доступна каждому. Именно поэтому мы
             создали сеть студий с фиксированными ценами и высоким качеством услуг.
           </p>
         </div>
